@@ -4,12 +4,14 @@ import { LoginForm, RegisterForm } from './components';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import AuthService from '../../services/AuthService';
 import { Redirect } from 'react-router-dom';
+import './styles.css';
 
 export default class AppAuth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowRenderRegisterForm: false
+      isShowRenderRegisterForm: false,
+      isRenderRedirect: false
     }
 
     // Binding method render
@@ -31,6 +33,7 @@ export default class AppAuth extends React.Component {
   renderLoginForm() {
     return (
       <React.Fragment>
+        {this.renderRedirect()}
         <Row className="mt-4 d-flex justify-content-center">
           <Col md={3}>
             <LoginForm onLoginEmit={this.onLoginEmit} />
@@ -47,6 +50,7 @@ export default class AppAuth extends React.Component {
   renderRegisterForm() {
     return (
       <React.Fragment>
+        {this.renderRedirect()}
         <Row className="mt-4 d-flex justify-content-center">
           <Col md={3}>
             <RegisterForm onRegisterEmit={this.onRegisterEmit} />
@@ -68,7 +72,9 @@ export default class AppAuth extends React.Component {
   }
 
   renderRedirect() {
-    return <Redirect to='/app-dashboard' />
+    if (this.state.isRenderRedirect) {
+      return <Redirect to='/app-dashboard' />
+    }
   }
 
   setStateIsShowRenderRegisterForm() {
@@ -82,6 +88,7 @@ export default class AppAuth extends React.Component {
       this.authService.setUsername(value.data.username);
       this.authService.setEmail(value.data.email);
       this.authService.saveAuth();
+      this.setState({isRenderRedirect: true});
     }
   }
 
@@ -92,13 +99,16 @@ export default class AppAuth extends React.Component {
   }
 
   render() {
-    if (this.authService.isAuthenticated()) {
-      return this.renderRedirect();
-    }
     if (!this.state.isShowRenderRegisterForm) {
       return this.renderLoginForm();
     } else {
       return this.renderRegisterForm();
+    }
+  }
+
+  componentDidMount() {
+    if (this.authService.isAuthenticated()) {
+      this.setState({isRenderRedirect: true});
     }
   }
 }
