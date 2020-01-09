@@ -1,5 +1,5 @@
 # Etchar Admin
-Welcome to etchar admin. This is UI for the Etchar System. You can clone the Etchar API [here]().
+Welcome to etchar admin. This is UI for the Etchar System. You can clone the Etchar API [here](https://github.com/idiotricks/etchar_api).
 
 ## What is etchar?
 Etchar is Open Source Human Resources System that you can use as an application to manage human resources in your office. 
