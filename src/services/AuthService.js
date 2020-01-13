@@ -5,6 +5,7 @@ export default class AuthService {
     this.userId = '';
     this.username = '';
     this.email = '';
+    this.headers = {};
   }
 
   saveAuth() {
@@ -68,5 +69,13 @@ export default class AuthService {
         return true;
       }
     return false;
+  }
+
+  setHeaders(params) {
+    this.headers = params;
+  }
+
+  getHeaders() {
+    return this.headers;
   }
 }

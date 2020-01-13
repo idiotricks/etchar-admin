@@ -40,7 +40,6 @@ export default class AppDashboard extends React.Component {
           </Row>
         </Container>
       </React.Fragment>
-        
     );
   }
 }
