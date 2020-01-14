@@ -42,6 +42,14 @@ export default class ServiceEmployee {
     return this.http.patch(`${this.baseURL}/employees/${id}/`, data, {headers: this.authService.getHeaders()});
   }
 
+  remove(id) {
+    this.authService.fetchAuth();
+    this.authService.setHeaders({
+      'Authorization': `Token ${this.authService.getToken()}`
+    });
+    return this.http.delete(`${this.baseURL}/employees/${id}/`, {headers: this.authService.getHeaders()});
+  }
+
   sanity(id) {
     this.authService.fetchAuth();
     this.authService.setHeaders({

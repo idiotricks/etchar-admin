@@ -16,6 +16,7 @@ export class EmployeeList extends React.Component {
     this.onListEmployee = this.onListEmployee.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onCreateEmployee = this.onCreateEmployee.bind(this);
+    this.onRemoveEmployee = this.onRemoveEmployee.bind(this);
 
     this.renderItem = this.renderItem.bind(this);
     this.renderHead = this.renderHead.bind(this);
@@ -41,6 +42,13 @@ export class EmployeeList extends React.Component {
     this.serviceEmployee.create()
       .then(response => {
         this.props.onSelect(response.data.id);
+      })
+  }
+
+  onRemoveEmployee() {
+    this.serviceEmployee.remove()
+      .then(response => {
+        this.props.onSelect(undefined);
       })
   }
 
