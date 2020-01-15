@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Alert, Spinner } from "react-bootstrap";
+import { Navbar, Alert, Spinner, Nav, ButtonGroup } from "react-bootstrap";
 
 
 export class TopNavbar extends React.Component {
@@ -9,6 +9,16 @@ export class TopNavbar extends React.Component {
         <Navbar.Brand href="/app-dashboard">
           Etchar Admin
         </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link>{this.props.title}</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        <ButtonGroup>
+        {this.props.renderAction}
+        {this.props.renderBack}
+        </ButtonGroup>
       </Navbar>
     )
   }
